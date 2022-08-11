@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"myapp/config"
-	"myapp/pkg/handlers"
-	"myapp/pkg/render"
+	"github.com/unimafy/goappy/pkg/config"
+	"github.com/unimafy/goappy/pkg/pkg/handlers"
+	"github.com/unimafy/goappy/pkg/pkg/render"
 	"net/http"
 	"time"
 

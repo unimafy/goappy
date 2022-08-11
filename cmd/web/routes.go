@@ -1,8 +1,8 @@
 package main
 
 import (
-	"myapp/config"
-	"myapp/pkg/handlers"
+	"github.com/unimafy/goappy/pkg/config"
+	"github.com/unimafy/goappy/pkg/pkg/handlers"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"

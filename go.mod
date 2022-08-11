@@ -1,4 +1,4 @@
-module myapp
+module github.com/unimafy/goappy/pkg
 
 go 1.19
 

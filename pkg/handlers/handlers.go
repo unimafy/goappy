@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"myapp/config"
-	"myapp/pkg/models"
-	"myapp/pkg/render"
+	"github.com/unimafy/goappy/pkg/pkg/models"
+	"github.com/unimafy/goappy/pkg/pkg/render"
+	"github.com/unimafy/goappy/pkg/config"
 	"net/http"
 )
 

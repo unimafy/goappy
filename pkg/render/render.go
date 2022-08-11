@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"html/template"
 	"log"
-	"myapp/config"
-	"myapp/pkg/models"
+	"github.com/unimafy/goappy/pkg/config"
+	"github.com/unimafy/goappy/pkg/pkg/models"
 	"net/http"
 	"path/filepath"
 )
