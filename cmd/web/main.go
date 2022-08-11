@@ -3,20 +3,37 @@ package main
 import (
 	"fmt"
 	"log"
-	"myapp/config"
-	"myapp/pkg/handlers"
-	"myapp/pkg/render"
+	"github.com/unimafy/goappy/pkg/config"
+	"github.com/unimafy/goappy/pkg/pkg/handlers"
+	"github.com/unimafy/goappy/pkg/pkg/render"
 	"net/http"
+	"time"
+
+	"github.com/alexedwards/scs/v2"
 )
 
 const portNumber = ":8080"
 
-func main() {
-	var app config.AppConfig
-	tc, err := render.CreateTemplateCache()
+var app config.AppConfig
+var session *scs.SessionManager
 
+// main is the main function
+func main() {
+	// change this to true when in production
+	app.InProduction = false
+
+	// set up the session
+	session = scs.New()
+	session.Lifetime = 24 * time.Hour
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = app.InProduction
+
+	app.Session = session
+
+	tc, err := render.CreateTemplateCache()
 	if err != nil {
-		log.Fatal("Cannot create template cache")
+		log.Fatal("cannot create template cache")
 	}
 
 	app.TemplateCache = tc
@@ -29,11 +46,13 @@ func main() {
 
 	fmt.Printf("Application is running on %s", portNumber)
 
-	serve := &http.Server{
+	srv := &http.Server{
 		Addr:    portNumber,
 		Handler: routes(&app),
 	}
 
-	err = serve.ListenAndServe()
-	log.Fatal(err)
+	err = srv.ListenAndServe()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
